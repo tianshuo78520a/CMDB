@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">服务列表</h3>
+        </div>
+        <div style="margin-top: 5px">
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <caption></caption>
+                <thead>
+                <tr>
+                    <th>服务名</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in service_list %}
+                    <tr>
+                        <td><a href="{{ i.id }}">{{ i.name }}</a></td>
+                        <td>
+                            {% if "/service/edit/(\d+)" in per_list %}
+                                <a href="/service/edit/{{ i.id }}"><button class="btn btn-primary">修改服务</button></a>
+                            {% endif %}
+
+                            {% if "/service/delete/(\d+)" in per_list %}
+{#                                <a href="/service/delete/{{ i.id }}"><button class="btn btn-danger">删除服务</button></a>#}
+                                <button id="{{ i.id }}" class="btn btn-danger">删除服务</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $(".btn-danger").on('click', function () {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/service/delete/' + id,
+                type: 'post',
+                data: {
+                    "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+                },
+                success: function (arg) {
+                    swal('删除成功');
+                }
+            })
+        })
+    </script>
+
+{% endblock content %}
+
+
+
+

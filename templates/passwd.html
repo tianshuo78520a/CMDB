@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row" style="color:#9d9d9d">
+        <div style="margin-top: 150px" class="col-md-8 col-md-offset-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div>
+                    <h2 class="col-md-offset-2">修改密码</h2>
+                    <div class="col-md-6 col-md-offset-1">
+                        <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" disabled="disabled" type="button">旧密码</button>
+                    </span>
+                            <input type="text" id="old_pwd" name="old_pwd" class="form-control col-md-4">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                        <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default default" disabled="disabled" type="button">新密码</button>
+                </span>
+                            <input type="password" id="pwd" name="pwd" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                        <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default default" disabled="disabled" type="button">新密码</button>
+                </span>
+                            <input type="password" id="new_pwd" name="new_pwd" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-2">
+                    <span style="color: red">{{ error }}</span>
+                    <input class="btn btn-primary" type="button" value="提交">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(".btn").on('click', function () {
+            $.ajax({
+                url: '/passwd/',
+                type: 'post',
+                data: {
+                    "old_pwd": $('#old_pwd').val(),
+                    "pwd": $('#pwd').val(),
+                    "new_pwd": $('#new_pwd').val(),
+                    "csrfmiddlewaretoken":$("[name='csrfmiddlewaretoken']").val()},
+                success: function (arg) {
+                    swal(arg)
+                }
+            })
+        })
+    </script>
+
+{% endblock %}
+

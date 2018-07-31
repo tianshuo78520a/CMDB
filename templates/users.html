@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">用户列表</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <caption></caption>
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>权限</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in user_list %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                    <td>
+                        {% for roles in i.roles.all %}
+                            {{ roles.title }}
+                        {% endfor %}
+                    </td>
+                        <td>
+{#                            {% if "/user/edit/(\d+)" in per_list %}#}
+{#                                <a href="/user/edit/{{ i.id }}">#}
+{#                                    <button class="btn btn-primary">修改权限</button>#}
+{#                                </a>#}
+{#                            {% endif %}#}
+                            {% if "/user/delete/(\d+)" in per_list %}
+                                <a href="/user/delete/{{ i.id }}">
+                                    <button class="btn btn-danger">删除用户</button>
+                                </a>
+                            {% endif %}
+                                </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+

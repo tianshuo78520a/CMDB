@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CMDB管理</title>
+
+    <link rel="stylesheet" href="/static/css/index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/static/js/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/sweetalert.css">
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/tendina.min.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript" src="/static/js/sweetalert.min.js"></script>
+
+</head>
+<body>
+    <!--顶部-->
+    <div class="layout_top_header">
+            <div style="float: left"><span style="font-size: 16px;line-height: 45px;padding-left: 20px;color: #8d8d8d">CMDB</span></div>
+            <div id="ad_setting" class="ad_setting">
+                <a class="ad_setting_a" href="javascript: ">
+                    <i class="icon-user glyph-icon" style="font-size: 20px"></i>
+                    <span>{{ request.session.user_name }}</span>
+                    <i class="icon-chevron-down glyph-icon"></i>
+                </a>
+                <ul class="dropdown-menu-uu" style="display: none" id="ad_setting_ul">
+                    <li class="ad_setting_ul_li"> <a href="javascript:"><i class="icon-user glyph-icon"></i> 个人中心 </a> </li>
+                    <li class="ad_setting_ul_li"> <a href="javascript:"><i class="icon-cog glyph-icon"></i> 设置 </a> </li>
+                    <li class="ad_setting_ul_li"> <a href="/logout/"><i class="icon-signout glyph-icon"></i> <span class="font-bold">退出</span> </a> </li>
+                </ul>
+            </div>
+    </div>
+    <!--顶部结束-->
+    <!--菜单-->
+    <div class="layout_left_menu">
+        <ul id="menu">
+            <li class="childUlLi">
+               <a href="/index/""><i class="glyph-icon icon-home"></i>首页</a>
+            </li>
+            <li class="childUlLi">
+                <a href="user.html"> <i class="glyph-icon icon-reorder"></i>机器管理</a>
+                <ul>
+                    <li><a href="/index/"><i class="glyph-icon icon-chevron-right"></i>查看机器</a></li>
+
+                    {% if "/server/free/" in per_list %}
+                        <li><a href="/server/free/"><i class="glyph-icon icon-chevron-right"></i>查看空闲机器</a></li>
+                    {% endif %}
+
+                    {% if "/server/add/" in per_list %}
+                        <li><a href="/server/add/"><i class="glyph-icon icon-chevron-right"></i>添加机器</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="role.html"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+                <ul>
+                    <li><a href="/passwd/"><i class="glyph-icon icon-chevron-right"></i>修改密码</a></li>
+                    <li><a href="/user/"><i class="glyph-icon icon-chevron-right"></i>查看用户</a></li>
+                    <li><a href="/user_info/"><i class="glyph-icon icon-chevron-right"></i>查看用户详情</a></li>
+                    {% if "/user/add/" in per_list %}
+                        <li><a href="/user/add/"><i class="glyph-icon icon-chevron-right"></i>添加用户</a></li>
+                    {% endif %}
+                    {% if "/user_info/add/" in per_list %}
+                        <li><a href="/user_info/add/"><i class="glyph-icon icon-chevron-right"></i>添加用户详情</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#"> <i class="glyph-icon  icon-location-arrow"></i>服务管理</a>
+                <ul>
+                    <li><a href="/service/"><i class="glyph-icon icon-chevron-right"></i>查看服务</a></li>
+                    <li><a href="/service/add/"><i class="glyph-icon icon-chevron-right"></i>添加服务</a></li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
+    <!--菜单-->
+    <div id="layout_right_content" class="layout_right_content">
+
+        <!--右边内容-->
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+    <div class="layout_footer">
+        <!--下边内容-->
+    </div>
+</body>
+</html>

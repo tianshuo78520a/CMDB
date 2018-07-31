@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">服务列表</h3>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-hover">
+                <h3>服务：{{ service_obj }}</h3>
+                <thead>
+                <tr>
+                    <th>机器列表</th>
+                </tr>
+                </thead>
+                <tbody>
+                       {% for server in service_obj.server_set.all %}
+                           <tr><td>{{ server.hostname }}</td></tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+

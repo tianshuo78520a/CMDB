@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">机器列表</h3>
+        </div>
+        <div style="margin-top: 5px">
+            <form class="bs-example bs-example-form" role="form" method="post">
+                {% csrf_token %}
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="host">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <caption></caption>
+                <thead>
+                <tr>
+                    <th>主机名</th>
+                    <th>状态</th>
+                    <th>负责人</th>
+                    <th>类型</th>
+                    <th>GPU数量</th>
+                    <th>机型</th>
+                    <th>docker</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for server_obj in pc_list %}
+                    <tr>
+                        <td>{{ server_obj.hostname }}</td>
+                        <td>{{ server_obj.get_server_status_id_display }}</td>
+                        <td>
+                            {% for obj in server_obj.user_info.all %}
+                                {{ obj.name }}{% if not forloop.last%},{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ server_obj.get_server_type_id_display }}</td>
+                        <td>{{ server_obj.gpu_number }}</td>
+                        <td>{{ server_obj.get_model_type_display }}</td>
+                        <td>{{ server_obj.get_docker_type_id_display }}</td>
+                        <td>{{ server_obj.msg }}</td>
+
+                        <td>
+                            {% if "/server/edit/(\d+)" in per_list %}
+                                <a href="/server/edit/{{ server_obj.id }}">
+                                    <button class="btn btn-primary">修改机器</button>
+                                </a>
+                            {% endif %}
+                            {% if "/server/delete/(\d+)" in per_list %}
+                                <a href="/server/delete/{{ server_obj.id }}">
+                                    <button class="btn btn-danger">删除机器</button>
+                                </a>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <nav class="pull-right">
+                <ul class="pagination">
+                    {{ page_html|safe }}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+
