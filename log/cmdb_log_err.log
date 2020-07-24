@@ -11,7 +11,7 @@ Traceback (most recent call last):
   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\fields\related_descriptors.py", line 389, in __get__
     self.related.get_accessor_name()
 django.db.models.fields.related_descriptors.RelatedObjectDoesNotExist: User has no userinfo.
-[2018-07-30 19:26:19,312][Thread-1:25060][task_id:django.request][exception.py:118][ERROR][Internal Server Error: /index/]
+[2018-07-30 19:26:19,312][Thread-1:25060][task_id:ddsadsadajango.request][exception.py:118][ERROR][Internal Server Error: /index/]
 Traceback (most recent call last):
   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
     response = get_response(request)
