@@ -1,4 +1,4 @@
-#!/usr/bin/env pythonfafa
+#!/usr/bin/env pythonfafadsa
 import os
 import sys
 
